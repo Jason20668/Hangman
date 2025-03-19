@@ -21,7 +21,7 @@ const wordList = [
 let selectedWord = ''
 let displayedWord = ''
 let wrongGuesses = 0
-const guessedLetters = []
+let guessedLetters = []
 const maxMistakes = 6
 
 //Start Game Function
@@ -63,11 +63,14 @@ function updateDifficultyDisplay(level) {
     if(level === 'Easy') {
         difficultyBox.innerText = 'Difficulty: Easy'
         difficultyBox.classList.add('Easy')
+        document.getElementById('categorySelection').classList.add('d-none')
     } else if(level === 'Medium'){
         difficultyBox.innerText = 'Difficulty: Medium'
         difficultyBox.classList.add('Medium')
-    }else if(lvel === 'Hard'){
+        document.getElementById('categorySelection').classList.add('d-none')
+    }else if(level === 'Hard'){
         difficultyBox.innerText = 'Difficulty: Hard'
         difficultyBox.classList.add('Hard')
+        document.getElementById('categorySelection').classList.add('d-none')
     }
 }

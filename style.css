@@ -1,14 +1,14 @@
-.easy {
+.Easy {
     background-color: green;
     color: white;
     border: 3px solid black;
 }
-.medium {
+.Medium {
     background-color: rgb(0, 36, 134);
     color: white;
     border: 3px solid black;
 }
-.hard {
+.Hard {
     background-color: rgb(128, 0, 0);
     color: white;
     border: 3px solid black;

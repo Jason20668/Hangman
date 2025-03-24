@@ -74,3 +74,35 @@ function updateDifficultyDisplay(level) {
         document.getElementById('categorySelection').classList.add('d-none')
     }
 }
+
+function updateUI() {
+    document.getElementById('wordDisplay').textContent = displayWord.split('').join(' ')
+}
+
+function guessLetter() {
+    let inputField = document.getElementById('letterInput')
+    let guessedLetter = inputField.ariaValueMax.toLowerCase()
+
+    if (!guessedLetter.match(/^[a-z]$/)) {
+        alert('Please enter a valid letter (A-Z)')
+        inputField.value = ''
+        return
+    }
+
+    if (guessedLetters.includes(guessedLetter)) {
+        alert('You already guessed that letter')
+        inputField.value = ''
+        return
+    }
+
+    guessedLetters.push(guessedLetter)
+
+    if (selectedWord.includes(guessedLetter)) {
+        updateCorrectGuess(guessedLetter)
+    } else {
+        updateWrongGuess(guessedLetter)
+    }
+
+    inputField.value = ''
+    document.getElementById('letterInput').focus()
+}

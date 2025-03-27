@@ -1,35 +1,35 @@
 //Word list array
 const wordList = [
-    'Jaws',
-    'It',
-    'Nope',
-,   'Lost',
-    'Shrek ',
-    'Dexter',
-    'Frozen',
-    'Rocky',
-    'Dune',
-    'Moana',
-    'Titanic',
-    'Inception',
-    'Sharknado',
-    'Mamma Mia',
-    'Jumanji',
-    'Snow White',
-    'The Office',
-    'Fight Club',
-    'Friends',
-    'Green Book',
-    'The Amazing World of Gumball',
-    'Adventure Time',
-    'Harold and Kumar go to White Castle',
-    'Supernatural',
-    'The Walking Dead',
-    'Invincible',
-    'Crouching Tiger Hidden Dragon',
-    'Samurai Jack',
-    'Interstellar',
-    'Monty Python and the Holy Grail'
+    'jaws',
+    'it',
+    'nope',
+,   'lost',
+    'shrek ',
+    'dexter',
+    'frozen',
+    'rocky',
+    'dune',
+    'moana',
+    'titanic',
+    'inception',
+    'sharknado',
+    'mammamia',
+    'jumanji',
+    'snowwhite',
+    'theoffice',
+    'fightclub',
+    'friends',
+    'greenbook',
+    'theamazingworldofgumball',
+    'adventuretime',
+    'haroldandkumargotowhitecastle',
+    'supernatural',
+    'thewalkingdead',
+    'invincible',
+    'crouchingtigerhiddendragon',
+    'samurai jack',
+    'interstellar',
+    'montypythonandtheholygrail'
 ]
 //decare variables
 let selectedWord = ''
@@ -77,13 +77,13 @@ function updateDifficultyDisplay (level) {
   difficultyBox.classList.remove('easy', 'medium', 'hard')
 
   if (level === 'easy') {
-    difficultyBox.textContent = 'Difficulty: Easy 🍀'
+    difficultyBox.textContent = 'Difficulty: Easy'
     difficultyBox.classList.add('easy')
   } else if (level === 'medium') {
-    difficultyBox.textContent = 'Difficulty: Medium 🌟'
+    difficultyBox.textContent = 'Difficulty: Medium'
     difficultyBox.classList.add('medium')
   } else if (level === 'hard') {
-    difficultyBox.textContent = 'Difficulty: Hard 💀'
+    difficultyBox.textContent = 'Difficulty: Hard'
     difficultyBox.classList.add('hard')
   }
 }
@@ -105,7 +105,7 @@ function guessLetter () {
   
 
   //Check if letter was already guessed
-  if(guessedLetters.includes(guessLetter)){
+  if(guessedLetters.includes(guessedLetter)){
     alert(`You already guessed '${guessedLetter}'. Try a different letter!`)
     inputField.value = '' // Clear input field
     return
@@ -125,33 +125,48 @@ function guessLetter () {
   document.getElementById('letterInput').focus() // Refocus input field for next guess
 
 }
-//shows what letters have been guessed
-function guessedLetter() {
 
-}
+function updateWrongGuess(guessedLetter){ 
+  wrongGuesses++
+  document.getElementById('wrongLetters').textContent += `${guessedLetter}`
+  //document.getElementById('shamrock').src = `imgs/shamrock${6-wrongGuesses}.jpg`
 
-//Shows amount of wrong guesses
-function updateWrongGuess(guessedLetter){
-    wrongGuesses++
-    document.getElementById('wrongLetters').textContent += `${guessedLetter}`
-    //document.getElementById('shamrock').src = `imgs/shamrock${6-wrongGuesses}.jpg`
-
-    if(wrongGuesses === maxMistakes){
-        //endGame(false)
-    }
+  if (wrongGuesses === maxMistakes){
+    endGame(false)
+  }
 }
 
 function updateCorrectGuess(guessedLetter){
-    let newDisplayedWord = ''
+  let newDisplayedWord =''
 
-    for (let i=0; i < selectedWord.length; i++){
-        if (selectedWord[i] === guessLetter){
-           newDisplayedWord += guessLetter
-        } else { 
-        newDisplayedWord += displayedWord[i]
-        }
+  for (let i=0; i < selectedWord.length; i++){
+    if (selectedWord[i] === guessedLetter){
+      newDisplayedWord += guessedLetter // Replace underscore with correct letter
+    }else{
+    newDisplayedWord += displayedWord[i] // Keep existing correct letters
     }
+  }
+
+  displayedWord = newDisplayedWord
+  updateUI()
+
+  //  Check if the player has guessed all letters
+  if (!displayedWord.includes('_')) {
+    endGame(true)
+  }
+
 }
 
-displayedWord = newDisplayedWord
-updateUI()
+function endGame(won){
+  let message = won
+  ? 'Congratulations! You guessed the word!'
+  : `❌ Game Over! The word was "${selectedWord}".`
+
+setTimeout(() => alert(message), 100) // Display alert after short delay
+
+}
+
+// /Restart Game - Reloads the page to reset everything
+function restartGame(){
+  location.reload()
+}

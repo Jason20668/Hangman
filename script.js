@@ -134,9 +134,8 @@ function updateWrongGuess(guessedLetter){
   if (wrongGuesses === maxMistakes){
     endGame(false)
   }
-}
 
-roboImage = document.getElementById('shamrock')
+  roboImage = document.getElementById('shamrock')
 
 if (wrongGuesses === 1){
   roboImage.src = 'IMGS/Shamrock1.png'
@@ -151,6 +150,9 @@ if (wrongGuesses === 1){
 } else if (wrongGuesses === 6){
   roboImage.src = 'IMGS/Shamrock6.png'
 }
+}
+
+
 
 function updateCorrectGuess(guessedLetter){
   let newDisplayedWord =''

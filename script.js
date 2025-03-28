@@ -20,7 +20,7 @@ const wordList = [
     'fightclub',
     'friends',
     'greenbook',
-    'theamazingworldofgumball',
+    'velocipastor',
     'adventuretime',
     'haroldandkumargotowhitecastle',
     'supernatural',
@@ -37,6 +37,7 @@ let displayedWord = ''
 let wrongGuesses = 0
 let guessedLetters = []
 const maxMistakes = 6
+let letterInput = document.getElementById('letterInput')
 
 // Start Game Function (runs everything)
 function startGame (level) {
@@ -103,7 +104,6 @@ function guessLetter () {
     return // Exit function
   }
   
-
   //Check if letter was already guessed
   if(guessedLetters.includes(guessedLetter)){
     alert(`You already guessed '${guessedLetter}'. Try a different letter!`)
@@ -136,6 +136,22 @@ function updateWrongGuess(guessedLetter){
   }
 }
 
+roboImage = document.getElementById('shamrock')
+
+if (wrongGuesses === 1){
+  roboImage.src = 'IMGS/Shamrock1.png'
+} else if (wrongGuesses === 2){
+  roboImage.src = 'IMGS/Shamrock2.png'
+} else if (wrongGuesses === 3){
+  roboImage.src = 'IMGS/Shamrock3.png'
+} else if (wrongGuesses === 4){
+  roboImage.src = 'IMGS/Shamrock4.png'
+} else if (wrongGuesses === 5){
+  roboImage.src = 'IMGS/Shamrock5.png'
+} else if (wrongGuesses === 6){
+  roboImage.src = 'IMGS/Shamrock6.png'
+}
+
 function updateCorrectGuess(guessedLetter){
   let newDisplayedWord =''
 
@@ -147,6 +163,8 @@ function updateCorrectGuess(guessedLetter){
     }
   }
 
+letterInput  
+
   displayedWord = newDisplayedWord
   updateUI()
 
@@ -156,6 +174,17 @@ function updateCorrectGuess(guessedLetter){
   }
 
 }
+
+letterInput.addEventListener("keypress", function(event) {
+  // If the user presses the "Enter" key on the keyboard
+  if (event.key === "Enter") {
+    // Cancel the default action, if needed
+    event.preventDefault();
+    // Trigger the button element with a click
+    document.getElementById("guessBtn").click();
+  }
+});
+
 
 function endGame(won){
   let message = won
@@ -168,5 +197,13 @@ setTimeout(() => alert(message), 100) // Display alert after short delay
 
 // /Restart Game - Reloads the page to reset everything
 function restartGame(){
-  location.reload()
+  document.getElementById('gameArea').classList.add('d-none')
+  document.getElementById('gameArea').classList.remove('d-block')
+
+  document.getElementById('difficultyBox').classList.add('d-none')
+  document.getElementById('difficultyBox').classList.remove('d-block')
+
+  document.getElementById('difficultySelection').classList.remove('d-none')
+  wrongGuesses = 0
+  document.getElementById('wrongletters') = ''
 }

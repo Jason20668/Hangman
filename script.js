@@ -205,5 +205,5 @@ function restartGame(){
 
   document.getElementById('difficultySelection').classList.remove('d-none')
   wrongGuesses = 0
-  document.getElementById('wrongletters') = ''
+  document.getElementById('wrongLetters').textContent = 'Wrong Guesses: '
 }

@@ -13,11 +13,3 @@
     color: white;
     border: 3px solid black;
 }
-
-.w3-modal {
-    border: 2px solid black;
-    color: black;
-    height: 500px;
-    text-align: center;
-    background-color: rgb(197, 193, 193);
-}

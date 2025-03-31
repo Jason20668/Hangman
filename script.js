@@ -3,7 +3,7 @@ const wordList = [
     'jaws',
     'it',
     'nope',
-,   'lost',
+,   'ted',
     'shrek ',
     'dexter',
     'frozen',
@@ -27,7 +27,7 @@ const wordList = [
     'thewalkingdead',
     'invincible',
     'crouchingtigerhiddendragon',
-    'samurai jack',
+    'samuraijack',
     'interstellar',
     'montypythonandtheholygrail'
 ]
@@ -172,7 +172,7 @@ letterInput
 
   //  Check if the player has guessed all letters
   if (!displayedWord.includes('_')) {
-    endGame(true)
+    endGame(false)
   }
 
 }
@@ -188,13 +188,19 @@ letterInput.addEventListener("keypress", function(event) {
 });
 
 
-function endGame(won){
-  let message = won
-  ? 'Congratulations! You guessed the word!'
-  : `❌ Game Over! The word was "${selectedWord}".`
-
-setTimeout(() => alert(message), 100) // Display alert after short delay
-
+function endGame(){
+  let message = document.getElementById('endText')
+  if (endGame === true){
+    document.getElementById('everythingGone').classList.add('d-none')
+    document.getElementById('endText').classList.remove('d-none')
+    document.getElementById('endText').classList.add('d-block')
+    message.textContent = `Congratulations! You found the word and stopped the evil robot from being built!`
+  } else {
+    document.getElementById('everythingGone').classList.add('d-none')
+    document.getElementById('endText').classList.remove('d-none')
+    document.getElementById('endText').classList.add('d-block')
+    message.textContent = `You failed! the word was ${selectedWord} and now the evil robot will destroy the world!`
+  }
 }
 
 // /Restart Game - Reloads the page to reset everything

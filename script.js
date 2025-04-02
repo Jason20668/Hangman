@@ -64,16 +64,13 @@ function startGame (level) {
   document.getElementById('letterInput').focus()
 }
 
-function customStart (level) {
+function customStart () {
   //reset game
- customWord = document.getElementById('customWord')
- displayedWord = customWord.innerhtml
+  let selectedWord = prompt('What is your word?');
 
   wrongGuesses = 0
   guessedLetters = []
-  displayedWord = '_'.repeat(displayedWord.textContent)
-
-  updateDifficultyDisplay(level)
+  displayedWord = '_'.repeat(selectedWord.textContent)
   updateUI()
 
   document.getElementById('gameArea').classList.remove('d-none')
@@ -110,7 +107,7 @@ function updateDifficultyDisplay (level) {
   } else if (level === 'hard') {
     difficultyBox.textContent = 'Difficulty: Hard'
     difficultyBox.classList.add('hard')
-  } else if (level === 'custom') {
+  } else{
     difficultyBox.textContent = 'Difficulty: Custom'
     difficultyBox.classList.add('Custom')
   }

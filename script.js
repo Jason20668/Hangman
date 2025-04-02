@@ -71,9 +71,7 @@ function customStart (level) {
 
   wrongGuesses = 0
   guessedLetters = []
-
-  selectedWord = getRandomWord(level)
-  displayedWord = '_'.repeat(selectedWord.length)
+  displayedWord = '_'.repeat(displayedWord.textContent)
 
   updateDifficultyDisplay(level)
   updateUI()
@@ -201,7 +199,7 @@ letterInput
 
   //  Check if the player has guessed all letters
   if (!displayedWord.includes('_')) {
-    endGame(false)
+    endGame(true)
   }
 
 }
@@ -217,9 +215,9 @@ letterInput.addEventListener("keypress", function(event) {
 });
 
 
-function endGame(){
+function endGame(won){
   let message = document.getElementById('endText')
-  if (endGame === true){
+  if (won){
     document.getElementById('everythingGone').classList.add('d-none')
     document.getElementById('endText').classList.remove('d-none')
     document.getElementById('endText').classList.add('d-block')

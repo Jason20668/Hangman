@@ -57,6 +57,32 @@ function startGame (level) {
 
   document.getElementById('difficultyBox').classList.remove('d-none')
   document.getElementById('difficultyBox').classList.add('d-block')
+  document.getElementById('guessStuff').classList.remove('d-none')
+  document.getElementById('guessStuff').classList.add('d-block')
+  document.getElementById('difficultySelection').classList.add('d-none')
+  //Auto-focus on input
+  document.getElementById('letterInput').focus()
+}
+
+function customStart (level) {
+  //reset game
+ customWord = document.getElementById('customWord')
+ displayedWord = customWord.innerhtml
+
+  wrongGuesses = 0
+  guessedLetters = []
+
+  selectedWord = getRandomWord(level)
+  displayedWord = '_'.repeat(selectedWord.length)
+
+  updateDifficultyDisplay(level)
+  updateUI()
+
+  document.getElementById('gameArea').classList.remove('d-none')
+  document.getElementById('gameArea').classList.add('d-block')
+
+  document.getElementById('difficultyBox').classList.remove('d-none')
+  document.getElementById('difficultyBox').classList.add('d-block')
 
   document.getElementById('difficultySelection').classList.add('d-none')
   //Auto-focus on input
@@ -75,7 +101,7 @@ function getRandomWord (level) {
 //update Difficulty Display
 function updateDifficultyDisplay (level) {
   let difficultyBox = document.getElementById('difficultyBox')
-  difficultyBox.classList.remove('easy', 'medium', 'hard')
+  difficultyBox.classList.remove('easy', 'medium', 'hard', 'custom')
 
   if (level === 'easy') {
     difficultyBox.textContent = 'Difficulty: Easy'
@@ -86,6 +112,9 @@ function updateDifficultyDisplay (level) {
   } else if (level === 'hard') {
     difficultyBox.textContent = 'Difficulty: Hard'
     difficultyBox.classList.add('hard')
+  } else if (level === 'custom') {
+    difficultyBox.textContent = 'Difficulty: Custom'
+    difficultyBox.classList.add('Custom')
   }
 }
 
@@ -195,11 +224,13 @@ function endGame(){
     document.getElementById('endText').classList.remove('d-none')
     document.getElementById('endText').classList.add('d-block')
     message.textContent = `Congratulations! You found the word and stopped the evil robot from being built!`
+    document.getElementById('winAudio').play()
   } else {
     document.getElementById('everythingGone').classList.add('d-none')
     document.getElementById('endText').classList.remove('d-none')
     document.getElementById('endText').classList.add('d-block')
     message.textContent = `You failed! the word was ${selectedWord} and now the evil robot will destroy the world!`
+    document.getElementById('loseAudio').play()
   }
 }
 
@@ -207,7 +238,8 @@ function endGame(){
 function restartGame(){
   document.getElementById('gameArea').classList.add('d-none')
   document.getElementById('gameArea').classList.remove('d-block')
-
+  document.getElementById('guessStuff').classList.add('d-none')
+  document.getElementById('guessStuff').classList.remove('d-block')
   document.getElementById('difficultyBox').classList.add('d-none')
   document.getElementById('difficultyBox').classList.remove('d-block')
 

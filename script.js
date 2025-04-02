@@ -224,26 +224,22 @@ function endGame(){
     document.getElementById('endText').classList.remove('d-none')
     document.getElementById('endText').classList.add('d-block')
     message.textContent = `Congratulations! You found the word and stopped the evil robot from being built!`
+    document.getElementById('restartBtn').classList.remove('d-none')
     document.getElementById('winAudio').play()
   } else {
     document.getElementById('everythingGone').classList.add('d-none')
     document.getElementById('endText').classList.remove('d-none')
     document.getElementById('endText').classList.add('d-block')
     message.textContent = `You failed! the word was ${selectedWord} and now the evil robot will destroy the world!`
+    document.getElementById('restartBtn').classList.remove('d-none')
     document.getElementById('loseAudio').play()
   }
 }
 
 // /Restart Game - Reloads the page to reset everything
 function restartGame(){
-  document.getElementById('gameArea').classList.add('d-none')
-  document.getElementById('gameArea').classList.remove('d-block')
-  document.getElementById('guessStuff').classList.add('d-none')
-  document.getElementById('guessStuff').classList.remove('d-block')
-  document.getElementById('difficultyBox').classList.add('d-none')
-  document.getElementById('difficultyBox').classList.remove('d-block')
-
-  document.getElementById('difficultySelection').classList.remove('d-none')
+  document.getElementById('everythingGone').classList.add('d-none')
+  document.getElementById('everythingGone').classList.remove('d-block')
   wrongGuesses = 0
   document.getElementById('wrongLetters').textContent = 'Wrong Guesses: '
 }

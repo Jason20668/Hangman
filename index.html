@@ -24,7 +24,7 @@
                     <button class="btn btn-success difficulty-btn" onclick="startGame('easy')">Easy</button>
                     <button class="btn btn-primary difficulty-btn" onclick="startGame('medium')">Medium</button>
                     <button class="btn btn-danger difficulty-btn" onclick="startGame('hard')">Hard</button>
-                    <button class="btn btn-warning difficulty-btn" onclick="customStart('custom')">Custom</button>
+                    <button class="btn btn-secondary difficulty-btn" onclick="customStart('custom')">Custom</button>
                     </div>
                     </div>
 
@@ -53,9 +53,9 @@
                 </div>
             </div>
     </div>
-    <div class="row">
-        <h1 id="endText" class="d-none fs-1 text-center"></h1>
-        <button id="restartBtn" class="btn btn-danger d-none d-flex justify-content-center w-50"
+    <div class="row d-flex justify-content-center pt-5">
+        <h1 id="endText" class="d-none fs-1 text-center d-flex justify-content-center"></h1>
+        <button id="restartBtn" class="btn d-none btn-danger w-50"
             onclick="restartGame()">Restart Game</button>
     </div>
 

@@ -65,23 +65,36 @@ function startGame (level) {
 }
 
 function customStart () {
-  //reset game
-  let selectedWord = prompt('What is your word?');
+  selectedWord = prompt('What is your word?');
 
-  wrongGuesses = 0
-  guessedLetters = []
-  displayedWord = '_'.repeat(selectedWord.textContent)
-  updateUI()
+  // Reset game 
+  wrongGuesses = 0;
+  guessedLetters = [];
+  displayedWord = '_'.repeat(selectedWord.length); 
 
-  document.getElementById('gameArea').classList.remove('d-none')
-  document.getElementById('gameArea').classList.add('d-block')
+  level = 'custom'
 
-  document.getElementById('difficultyBox').classList.remove('d-none')
-  document.getElementById('difficultyBox').classList.add('d-block')
+  updateDifficultyDisplay(level)
+  updateUI();
 
-  document.getElementById('difficultySelection').classList.add('d-none')
-  //Auto-focus on input
-  document.getElementById('letterInput').focus()
+  // Show the game area
+  document.getElementById('gameArea').classList.remove('d-none');
+  document.getElementById('gameArea').classList.add('d-block');
+
+  // Show the difficulty box (custom difficulty message)
+  document.getElementById('difficultyBox').classList.remove('d-none');
+  document.getElementById('difficultyBox').classList.add('d-block');
+  document.getElementById('difficultyBox').textContent = 'Difficulty: Custom';
+
+  // Hide the difficulty selection
+  document.getElementById('difficultySelection').classList.add('d-none');
+
+  // Show the guess input section
+  document.getElementById('guessStuff').classList.remove('d-none');
+  document.getElementById('guessStuff').classList.add('d-block');
+
+  // Auto-focus the letter input for user to start guessing
+  document.getElementById('letterInput').focus();
 }
 
 function getRandomWord (level) {
@@ -107,9 +120,9 @@ function updateDifficultyDisplay (level) {
   } else if (level === 'hard') {
     difficultyBox.textContent = 'Difficulty: Hard'
     difficultyBox.classList.add('hard')
-  } else{
+  } else if (level === 'custom') {
     difficultyBox.textContent = 'Difficulty: Custom'
-    difficultyBox.classList.add('Custom')
+    difficultyBox.classList.add('custom')
   }
 }
 
@@ -153,7 +166,6 @@ function guessLetter () {
 function updateWrongGuess(guessedLetter){ 
   wrongGuesses++
   document.getElementById('wrongLetters').textContent += `${guessedLetter}`
-  //document.getElementById('shamrock').src = `imgs/shamrock${6-wrongGuesses}.jpg`
 
   if (wrongGuesses === maxMistakes){
     endGame(false)
@@ -163,6 +175,7 @@ function updateWrongGuess(guessedLetter){
 
 if (wrongGuesses === 1){
   roboImage.src = 'IMGS/Shamrock1.png'
+  document.getElementById('shamrock').classList.remove('d-none')
 } else if (wrongGuesses === 2){
   roboImage.src = 'IMGS/Shamrock2.png'
 } else if (wrongGuesses === 3){
@@ -183,9 +196,9 @@ function updateCorrectGuess(guessedLetter){
 
   for (let i=0; i < selectedWord.length; i++){
     if (selectedWord[i] === guessedLetter){
-      newDisplayedWord += guessedLetter // Replace underscore with correct letter
+      newDisplayedWord += guessedLetter 
     }else{
-    newDisplayedWord += displayedWord[i] // Keep existing correct letters
+    newDisplayedWord += displayedWord[i] 
     }
   }
 
@@ -231,10 +244,25 @@ function endGame(won){
   }
 }
 
-// /Restart Game - Reloads the page to reset everything
-function restartGame(){
-  document.getElementById('everythingGone').classList.add('d-none')
-  document.getElementById('everythingGone').classList.remove('d-block')
-  wrongGuesses = 0
-  document.getElementById('wrongLetters').textContent = 'Wrong Guesses: '
+function restartGame() {
+  // Reset game 
+  wrongGuesses = 0;
+  guessedLetters = [];
+  selectedWord = '';
+  displayedWord = '';
+
+
+  document.getElementById('restartBtn').classList.add('d-none');
+  document.getElementById('endText').classList.add('d-none');
+
+  document.getElementById('difficultySelection').classList.remove('d-none');
+  document.getElementById('difficultyBox').classList.add('d-none');
+  document.getElementById('shamrock').src = 'IMGS/Shamrock1.png';
+  document.getElementById('shamrock').classList.add('d-none');
+  document.getElementById('gameArea').classList.add('d-none');
+
+  document.getElementById('wrongLetters').textContent = 'Wrong Guesses: ';
+  document.getElementById('everythingGone').classList.remove('d-none');
+  document.getElementById('everythingGone').classList.add('d-block');
+  document.getElementById('guessStuff').classList.add('d-none')
 }
